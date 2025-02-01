@@ -1,0 +1,52 @@
+{
+  "people": [
+    { "name": "Иван", "gender": "M" },
+    { "name": "Мария", "gender": "W" },
+    { "name": "Алексей", "gender": "M" },
+    { "name": "Пётр", "gender": "M" },
+    { "name": "Анна", "gender": "W" },
+    { "name": "Сергей", "gender": "M" },
+    { "name": "Виктория", "gender": "W" },
+    { "name": "Зинаида", "gender": "W" },
+    { "name": "Олег", "gender": "M" },
+    { "name": "Гриша", "gender": "M" },
+    { "name": "Настя", "gender": "W" },
+    { "name": "Света", "gender": "W" },
+    { "name": "Ульяна", "gender": "W" },
+    { "name": "Лиза", "gender": "W" },
+    { "name": "Дима", "gender": "M" },
+    { "name": "Глаша", "gender": "W" },
+    { "name": "Александра", "gender": "W" },
+    { "name": "Андрей", "gender": "M" },
+    { "name": "Влад", "gender": "M" },
+    { "name": "Надя", "gender": "W" },
+    { "name": "Соня", "gender": "W" },
+    { "name": "Клава", "gender": "W" }
+  ],
+  "marriages": [
+    { "husband": "Иван", "wife": "Мария" },
+    { "husband": "Алексей", "wife": "Виктория" },
+    { "husband": "Андрей", "wife": "Александра" },
+    { "husband": "Влад", "wife": "Надя" },
+    { "husband": "Дима", "wife": "Соня" },
+    { "husband": "Олег", "wife": "Клава" }
+  ],
+  "parent_child": [
+    { "parent": "Иван", "child": "Алексей" },
+    { "parent": "Пётр", "child": "Иван" },
+    { "parent": "Лиза", "child": "Иван" },
+    { "parent": "Алексей", "child": "Анна" },
+    { "parent": "Анна", "child": "Сергей" },
+    { "parent": "Зинаида", "child": "Мария" },
+    { "parent": "Алексей", "child": "Олег" },
+    { "parent": "Иван", "child": "Гриша" },
+    { "parent": "Иван", "child": "Настя" },
+    { "parent": "Иван", "child": "Света" },
+    { "parent": "Анна", "child": "Ульяна" },
+    { "parent": "Дима", "child": "Виктория" },
+    { "parent": "Дима", "child": "Глаша" },
+    { "parent": "Дима", "child": "Александра" },
+    { "parent": "Дима", "child": "Влад" },
+    { "parent": "Соня", "child": "Виктория" }
+  ]
+}
