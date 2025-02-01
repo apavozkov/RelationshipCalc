@@ -4,20 +4,19 @@ require 'thread'
 # Загрузка данных о людях, браках и родительских связях
 def load_people_data(file_path)
   unless File.exist?(file_path)
-    puts "Файл #{file_path} не найден."
-    exit
+    warn "Файл #{file_path} не найден."
+    return nil
   end
 
   begin
     data = JSON.parse(File.read(file_path))
   rescue JSON::ParserError => e
-    puts "Ошибка в формате JSON: #{e.message}"
-    exit
+    warn "Ошибка в формате JSON: #{e.message}"
+    return nil
   end
 
   people = {}
 
-  # Инициализация записей о людях
   data['people'].each do |person|
     name = person['name']
     people[name] = {
@@ -28,7 +27,6 @@ def load_people_data(file_path)
     }
   end
 
-  # Обработка браков
   data['marriages']&.each do |marriage|
     husband = marriage['husband']
     wife = marriage['wife']
@@ -36,7 +34,6 @@ def load_people_data(file_path)
     people[wife][:spouses] << husband unless people[wife][:spouses].include?(husband)
   end
 
-  # Обработка родительских связей
   data['parent_child']&.each do |pc|
     parent = pc['parent']
     child = pc['child']
@@ -50,15 +47,15 @@ end
 # Загрузка формул родственных связей
 def load_formulas(file_path)
   unless File.exist?(file_path)
-    puts "Файл #{file_path} не найден."
-    exit
+    warn "Файл #{file_path} не найден."
+    return nil
   end
 
   begin
     JSON.parse(File.read(file_path))
   rescue JSON::ParserError => e
-    puts "Ошибка в формате JSON: #{e.message}"
-    exit
+    warn "Ошибка в формате JSON: #{e.message}"
+    return nil
   end
 end
 
@@ -124,39 +121,44 @@ end
 
 # Основная функция программы
 def main
-  start_person = ARGV[0]
-  unless start_person
-    puts "Укажите имя человека в качестве аргумента."
-    exit
+  # Проверка наличия аргумента
+  unless ARGV[0]
+    warn "Укажите имя человека в качестве аргумента."
+    exit 1
   end
+  start_person = ARGV[0]
 
-  people_data = load_people_data('people.json')
-  formulas = load_formulas('formulas.json')
+  # Загрузка данных
+  people_data = load_people_data('people.json') || exit(1)
+  formulas = load_formulas('formulas.json') || exit(1)
 
-  result = {}
-  mutex = Mutex.new
+  begin
+    result = {}
+    mutex = Mutex.new
 
-  # Обработка каждой формулы в отдельном потоке
-  threads = formulas.map do |type, formula|
-    Thread.new do
-      relatives = calculate_relatives(formula, start_person, people_data)
-      mutex.synchronize do
-        result[type] ||= []
-        result[type] += relatives
-        result[type].uniq!
+    threads = formulas.map do |type, formula|
+      Thread.new do
+        relatives = calculate_relatives(formula, start_person, people_data)
+        mutex.synchronize do
+          result[type] ||= []
+          result[type] += relatives
+          result[type].uniq!
+        end
       end
     end
+
+    threads.each(&:join)
+
+    # Обработка и сохранение результатов
+    result.each { |k, v| result[k] = v.empty? ? 'none' : v.sort }
+    File.write('output.json', JSON.pretty_generate(result))
+
+  rescue => e
+    warn "Критическая ошибка: #{e.message}"
+    exit 1
   end
 
-  threads.each(&:join)
-
-  # Обработка пустых результатов
-  result.each do |k, v|
-    result[k] = v.empty? ? 'none' : v.sort
-  end
-
-  # Сохранение результатов в JSON-файл
-  File.write('output.json', JSON.pretty_generate(result))
+  exit 0
 end
 
 main
