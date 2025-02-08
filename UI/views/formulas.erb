@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Формулы</title>
+  <style>
+    .formula-item {
+      margin-bottom: 10px;
+    }
+    .formula-item button {
+      margin-left: 10px;
+    }
+    .button {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Список формул</h1>
+  <a href="/formulas/add" class="button">Добавить новую формулу</a>
+  <br><br>
+  <ul>
+    <% @formulas.each do |type, formula| %>
+      <li class="formula-item">
+        <strong><%= type %>:</strong>
+        <a href="/formulas/edit/<%= type %>" class="button">Редактировать</a>
+        <form action="/formulas/delete/<%= type %>" method="post" style="display:inline;">
+          <button type="submit">Удалить</button>
+        </form>
+        <a href="/formulas/view/<%= type %>" class="button">Посмотреть</a>
+      </li>
+    <% end %>
+  </ul>
+  <br>
+  <a href="/" class="button">На главную</a>
+</body>
+</html>
