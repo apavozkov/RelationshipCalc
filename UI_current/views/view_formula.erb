@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Формула: <%= @type %></title>
+  <style>
+  .button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <h1>Тип: <%= @type %></h1>
+  <p><strong>Формула:</strong> <%= @formula %></p>
+  <br>
+  <a href="/formulas" class="button">Назад к списку формул</a>
+</body>
+</html>
