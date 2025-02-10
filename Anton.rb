@@ -169,7 +169,7 @@ if __FILE__ == $0 && !ENV['TEST_MODE']
   end
 
   person_name = ARGV[0]
-  file_path = 'data.json' # Укажите путь к вашему файлу данных
+  file_path = 'people.json'
 
   people = load_people_data(file_path)
   if people.nil?
