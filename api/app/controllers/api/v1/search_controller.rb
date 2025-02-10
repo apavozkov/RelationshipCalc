@@ -75,7 +75,7 @@ class Api::V1::SearchController < ApplicationController
 
       threads = formulas.map do |f|
         Thread.new do
-          relatives = calculate_relatives(f.formulas, params[:name], people_data)
+          relatives = calculate_relatives(f.formula, params[:name], people_data)
           mutex.synchronize do
             result[f.name] ||= []
             result[f.name] += relatives

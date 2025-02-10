@@ -7,7 +7,7 @@ class Api::V1::FormulasController < ApplicationController
   def create
     formula = Formula.new(
       name: params[:name],
-      formulas: params[:formula]
+      formula: params[:formula]
     )
     if formula.save
       render json: formula, status: 200 else
