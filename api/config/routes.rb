@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :formulas, only:[:index,:show,:create]
       resources :names, only:[:index,:show,:create]
       resources :relations, only:[:index,:show,:create]
       resources :search, only:[:index,:show,:create]

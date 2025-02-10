@@ -325,7 +325,32 @@ Person.create([
     {name: "Ярослав" ,gender: "М"},
     {name: "Ярослава" ,gender: "Ж"}]
     )
-
+Formula.create([
+        {name:"Супруг", formula: "LIK(M)"},
+        {name:"Супруга", formula: "LIK(W)"},
+        {name:"Сын", formula: "UNG(M)&&LIK(M)/UNG(M)"},
+        {name:"Дочь", formula: "UNG(W)&&LIK(M)/UNG(W)"},
+        {name:"Мать", formula: "ELDRE(W)&&ELDRE(M)/LIK(W)"},
+        {name:"Отец", formula: "ELDRE(M)"},
+        {name:"Брат", formula: "ELDRE(M)/UNG(M)"},
+        {name:"Сестра", formula: "ELDRE(M)/UNG(W)"},
+        {name:"Внук", formula: "UNG(M)/UNG(M)&&UNG(W)/UNG(M)&&LIK(M)/UNG(M)/UNG(M)&&LIK(M)/UNG(W)/UNG(M)"},
+        {name:"Внучка", formula: "UNG(M)/UNG(W)&&UNG(W)/UNG(W)&&LIK(M)/UNG(M)/UNG(W)&&LIK(M)/UNG(W)/UNG(W)"},
+        {name:"Дедушка", formula: "ELDRE(M)/ELDRE(M)&&ELDRE(M)/LIK(W)/ELDRE(M)"},
+        {name:"Бабушка", formula: "ELDRE(M)/LIK(W)/ELDRE(W)&&ELDRE(M)/ELDRE(M)/LIK(W)"},
+        {name:"Свояченица", formula: "LIK(W)/ELDRE(M)/UNG(W)"},
+        {name:"Свояк", formula: "LIK(W)/ELDRE(M)/UNG(W)/LIK(M)"},
+        {name:"Шурин", formula: "LIK(W)/ELDRE(M)/UNG(M)"},
+        {name:"Невестка", formula: "LIK(W)/ELDRE(M)/UNG(M)/LIK(W)&&LIK(M)/ELDRE(M)/UNG(M)/LIK(W)"},
+        {name:"Тесть", formula: "LIK(W)/ELDRE(M)"},
+        {name:"Теща", formula: "LIK(W)/ELDRE(M)/LIK(W)"},
+        {name:"Сверковь", formula: "LIK(M)/ELDRE(M)/LIK(W)"},
+        {name:"Свекр", formula: "LIK(M)/ELDRE(M)"},
+        {name:"Сноха", formula: "UNG(M)/LIK(W)"},
+        {name:"Деверь", formula: "LIK(M)/ELDRE(M)/UNG(M)"},
+        {name:"Золовка", formula: "LIK(M)/ELDRE(M)/UNG(W)"},
+        {name:"Зять", formula: "LIK(M)/ELDRE(M)/UNG(W)/LIK(M)"}
+])
 Relation.create([
     {relative: "Акакий", dependant: "Аза", relation: "married"},
     {relative: "Демьян", dependant: "Евдокия", relation: "married"},

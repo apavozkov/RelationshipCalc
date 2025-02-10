@@ -4,15 +4,15 @@ class Api::V1::NamesController < ApplicationController
     render json: persons, status: 200
   end
 
-#   def create
-#     person = Person.new(
-#       name: prod_params[:name],
-#       gender: prod_params[:gender]
-#     )
-#     if person.save
-#       render json: person, status: 200 else
-#       render json: {error: "Error creating person."} end
-#   end
+  def create
+    person = Person.new(
+      name: params[:name],
+      gender: params[:gender]
+    )
+    if person.save
+      render json: person, status: 200 else
+      render json: {error: "Error creating person."} end
+  end
 # # This method looks up the product by the id, if it is found we render the ison object
 # # Otherwise we render an error object.
 #   def show
