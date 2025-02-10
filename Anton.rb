@@ -44,7 +44,7 @@ def load_people_data(file_path)
   people
 end
 
-# Загрузка формул родственных связей
+# Загрузка формул
 def load_formulas(file_path)
   unless File.exist?(file_path)
     warn "Файл #{file_path} не найден."
@@ -114,6 +114,7 @@ end
 
 # Проверка валидности формулы
 def valid_formula?(formula)
+  return false if formula.empty?
   formula.split('/').all? do |step|
     step.match?(/^(ELDRE|LIK|UNG)\([MW]\)$/)
   end
@@ -161,4 +162,26 @@ def main
   exit 0
 end
 
-main
+if __FILE__ == $0 && !ENV['TEST_MODE']
+  if ARGV.empty?
+    warn "Укажите имя человека в качестве аргумента."
+    exit 1
+  end
+
+  person_name = ARGV[0]
+  file_path = 'data.json' # Укажите путь к вашему файлу данных
+
+  people = load_people_data(file_path)
+  if people.nil?
+    warn "Не удалось загрузить данные."
+    exit 1
+  end
+
+  if people[person_name].nil?
+    warn "Человек с именем #{person_name} не найден."
+    exit 1
+  end
+
+  puts "Информация о человеке #{person_name}:"
+  puts people[person_name]
+end
