@@ -1,16 +1,18 @@
 require 'sinatra'
 require 'json'
+require_relative '../Algorithm/Anton'
+require_relative '../Algorithm/AntonChild'
 
 def load_formulas
-    if File.exist?('formulas.json')
-        JSON.parse(File.read('formulas.json'))
+    if File.exist?('../Algorithm/formulas.json')
+        JSON.parse(File.read('../Algorithm/formulas.json'))
     else
         @error = "Отсутствует файл formulas.json"
     end
 end
 
 def save_formulas(formulas)
-    File.write('formulas.json', JSON.pretty_generate(formulas))
+    File.write('../Algorithm/formulas.json', JSON.pretty_generate(formulas))
 end
 
 get '/' do
@@ -20,18 +22,31 @@ end
 post '/search' do
     name = params[:name]
 
-    system("ruby Anton.rb #{name}")
-
-    if File.exist?('output.json')
-        @relatives = JSON.parse(File.read('output.json'))
-    else
-        @error = "У Антона сегодня выходной."
-    end
+    @relatives = Anton.run(name)
 
     if @error
         erb :error
     else
         erb :results
+    end
+end
+
+post '/update' do
+
+    filename = "input.txt"
+    
+    begin
+        AntonChild.from_txt_to_json(filename)
+        @message = "База данных успешно обновлена."
+
+    rescue => e
+        @error = "Ошибка при обновлении базы данных: #{e.message}"
+    end
+
+    if @error
+        erb :error
+    else
+        redirect '/'
     end
 end
 
@@ -53,7 +68,7 @@ post '/formulas/add' do
     save_formulas(formulas)
   
     redirect '/formulas'
-  end
+end
 
 get '/formulas/edit/:type' do
     @type = params[:type]

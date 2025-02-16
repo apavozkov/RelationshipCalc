@@ -21,16 +21,14 @@
   <h1>Результаты поиска для "<%= params[:name] %>"</h1>
   <ul>
     <% @relatives.each do |type, names| %>
-      <li>
-        <strong><%= type %>:</strong>
-        <% if names == "none" %>
-          -
-        <% else %>
-          <%= names.join(", ") %>
-        <% end %>
-      </li>
+      <% unless names.empty? || names == "none" %>
+        <li>
+          <strong><%= type %>:</strong>
+            <%= names.join(", ") %>
+        </li>
+      <% end %>
     <% end %>
-  </ul>
-  <a href="/" class="button">Назад</a>
+    </ul>
+    <a href="/" class="button">Назад</a>
 </body>
 </html>

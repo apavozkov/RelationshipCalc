@@ -36,18 +36,20 @@
 </head>
 <body>
   <h1>Список формул</h1>
-  <a href="/formulas/add" class="button">Добавить новую формулу</a>
-  <br><br>
+  <a href="/formulas/add" class="button" style="background-color: purple">Добавить новую формулу</a>
+  <br>
   <ul>
     <% @formulas.each do |type, formula| %>
-      <li class="formula-item">
-        <strong><%= type %>:</strong>
-        <a href="/formulas/edit/<%= type %>" class="button">Редактировать</a>
-        <form action="/formulas/delete/<%= type %>" method="post" style="display:inline;">
-          <button type="submit">Удалить</button>
-        </form>
-        <a href="/formulas/view/<%= type %>" class="button">Посмотреть</a>
-      </li>
+      <table>
+        <tr>
+          <td style="font-size: 20px; width: 150px;" align=left><strong><%= type %></strong></td>
+          <td><a href="/formulas/edit/<%= type %>" class="button" style="font-size: 10px;">Редактировать</a></td>
+          <td><form action="/formulas/delete/<%= type %>" method="post" style="display:inline; font-size: 10px;">
+          <td> <button type="submit" style="font-size: 10px; background-color: red">Удалить</button> </td>
+          </form></td>
+          <td><a href="/formulas/view/<%= type %>" class="button" style="font-size: 10px; background-color: green">Посмотреть</a></td>
+        </tr>
+      </table>
     <% end %>
   </ul>
   <br>
