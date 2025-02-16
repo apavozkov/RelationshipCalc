@@ -1,4 +1,4 @@
-require_relative '../../../../../algorithm/AlgorithmDbInput'
+require_relative '../../../../../Algorithm/AlgorithmDbInput'
 
 class Api::V1::SearchController < ApplicationController
   def index
