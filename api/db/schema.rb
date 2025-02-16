@@ -21,17 +21,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_111052) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string "name"
-    t.string "gender"
+  create_table "marriages", force: :cascade do |t|
+    t.string "husband"
+    t.string "wife"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "relations", force: :cascade do |t|
-    t.string "relative"
-    t.string "dependant"
-    t.string "relation"
+  create_table "parents", force: :cascade do |t|
+    t.string "parent"
+    t.string "child"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "name"
+    t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
