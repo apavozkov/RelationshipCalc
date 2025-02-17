@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :formulas, only:[:index,:show,:create]
       resources :names, only:[:index,:show,:create]
-      resources :relations, only:[:index,:show,:create]
+      resources :marriages, only:[:index,:show,:create]
+      resources :parents, only:[:index,:show,:create]
       resources :search, only:[:index,:show,:create]
     end
   end
