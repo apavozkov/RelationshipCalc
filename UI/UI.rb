@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require_relative '../Algorithm/Anton'
+require_relative '../Algorithm/AlgorithmJsonInput'
 require_relative '../Algorithm/AntonChild'
 
 def load_formulas
@@ -22,7 +22,7 @@ end
 post '/search' do
     name = params[:name]
 
-    @relatives = Anton.run(name)
+    @relatives = AlgorithmJsonInput.run(name)
 
     if @error
         erb :error
